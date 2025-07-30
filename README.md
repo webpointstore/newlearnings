@@ -1,4 +1,4 @@
-# newlearnings
+# Welcome to Athar's new world & change your vision and life
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">

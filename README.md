@@ -1,1 +1,360 @@
 # newlearnings
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Learning Path: Mastering Data Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Neutrals (Slate Gray, Off-white, Muted Indigo) -->
+    <!-- Application Structure Plan: A single-page, thematic layout with a sticky navigation bar and accordion-style sections for each learning topic (Spreadsheets, Power BI, SQL, Python). This structure allows for non-linear exploration and prevents information overload, making the curriculum easy to digest. Accordions encourage user interaction. A final "Benefits" section reinforces the value proposition. -->
+    <!-- Visualization & Content Choices: Report Info: Learning path curriculum -> Goal: Inform & Organize -> Viz/Presentation Method: Accordion lists for detailed skills, two-column layout for benefits, one illustrative Chart.js donut chart to visually represent Power BI components -> Interaction: Click-to-expand accordions, smooth-scroll navigation -> Justification: This organizes a dense curriculum into a manageable, interactive format. The single chart adds visual interest without complexity. -> Library/Method: Vanilla JS for interactions, Chart.js for the chart. NO SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .accordion-button.active .accordion-arrow {
+            transform: rotate(180deg);
+        }
+        .nav-link {
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-slate-800">
+                <span class="text-indigo-600">Data</span>Skills Path
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#spreadsheets" class="nav-link text-slate-600 hover:text-indigo-600 border-b-2 border-transparent hover:border-indigo-600 pb-1">Spreadsheets</a>
+                <a href="#powerbi" class="nav-link text-slate-600 hover:text-indigo-600 border-b-2 border-transparent hover:border-indigo-600 pb-1">Power BI</a>
+                <a href="#sql" class="nav-link text-slate-600 hover:text-indigo-600 border-b-2 border-transparent hover:border-indigo-600 pb-1">SQL</a>
+                <a href="#python" class="nav-link text-slate-600 hover:text-indigo-600 border-b-2 border-transparent hover:border-indigo-600 pb-1">Python</a>
+                <a href="#benefits" class="nav-link text-slate-600 hover:text-indigo-600 border-b-2 border-transparent hover:border-indigo-600 pb-1">Benefits</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-slate-600 hover:text-indigo-600 hover:bg-slate-100 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4 space-y-2">
+            <a href="#spreadsheets" class="block nav-link text-slate-600 hover:text-indigo-600 py-2">Spreadsheets</a>
+            <a href="#powerbi" class="block nav-link text-slate-600 hover:text-indigo-600 py-2">Power BI</a>
+            <a href="#sql" class="block nav-link text-slate-600 hover:text-indigo-600 py-2">SQL</a>
+            <a href="#python" class="block nav-link text-slate-600 hover:text-indigo-600 py-2">Python</a>
+            <a href="#benefits" class="block nav-link text-slate-600 hover:text-indigo-600 py-2">Benefits</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section class="text-center mb-20">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Mastering Data Tools: Your Interactive Learning Path</h1>
+            <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">An explorable curriculum for becoming a computer teacher and institute owner, leveraging a background in Finance and AI.</p>
+        </section>
+
+        <div class="space-y-16">
+            <section id="spreadsheets">
+                <h2 class="text-3xl font-bold text-slate-800 mb-2 flex items-center">
+                    <span class="text-2xl mr-4 text-white bg-green-500 rounded-full w-12 h-12 flex items-center justify-center">1</span>
+                    Mastering Advanced Spreadsheets
+                </h2>
+                <p class="text-slate-600 mb-8 ml-16">Transform from a basic user to an advanced data analyst with Excel & Google Sheets.</p>
+                <div class="space-y-4 ml-16">
+                    <div class="accordion-item bg-white rounded-lg shadow-md">
+                        <button class="accordion-button w-full text-left p-5 font-semibold text-slate-800 flex justify-between items-center">
+                            Advanced Formulas & Functions
+                            <span class="accordion-arrow transition-transform duration-300">&#9660;</span>
+                        </button>
+                        <div class="accordion-content">
+                            <ul class="p-5 pt-0 text-slate-600 list-disc list-inside space-y-2">
+                                <li><b>Lookup & Reference:</b> <code>XLOOKUP</code>, <code>VLOOKUP</code>, <code>INDEX-MATCH</code></li>
+                                <li><b>Logical:</b> <code>IF</code>, <code>IFS</code>, <code>AND</code>, <code>OR</code></li>
+                                <li><b>Statistical:</b> <code>SUMIFS</code>, <code>COUNTIFS</code>, <code>AVERAGEIFS</code></li>
+                                <li><b>Text & Date:</b> <code>CONCATENATE</code>, <code>LEFT</code>, <code>RIGHT</code>, <code>DATEDIF</code></li>
+                                <li><b>Financial:</b> <code>NPV</code>, <code>IRR</code>, <code>PMT</code></li>
+                                <li><b>Dynamic Arrays (Excel 365):</b> <code>UNIQUE</code>, <code>SORT</code>, <code>FILTER</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-white rounded-lg shadow-md">
+                        <button class="accordion-button w-full text-left p-5 font-semibold text-slate-800 flex justify-between items-center">
+                            Data Analysis & Modeling
+                            <span class="accordion-arrow transition-transform duration-300">&#9660;</span>
+                        </button>
+                        <div class="accordion-content">
+                            <ul class="p-5 pt-0 text-slate-600 list-disc list-inside space-y-2">
+                                <li><b>Pivot Tables & Pivot Charts:</b> Comprehensive mastery for summarizing data</li>
+                                <li><b>Data Validation & Conditional Formatting:</b> Ensure data quality and visual insights</li>
+                                <li><b>What-If Analysis:</b> Goal Seek, Scenario Manager, Data Tables for financial planning</li>
+                                <li><b>Name Manager:</b> For cleaner, readable formulas</li>
+                            </ul>
+                        </div>
+                    </div>
+                     <div class="accordion-item bg-white rounded-lg shadow-md">
+                        <button class="accordion-button w-full text-left p-5 font-semibold text-slate-800 flex justify-between items-center">
+                            Visualization & Basic Automation
+                            <span class="accordion-arrow transition-transform duration-300">&#9660;</span>
+                        </button>
+                        <div class="accordion-content">
+                            <ul class="p-5 pt-0 text-slate-600 list-disc list-inside space-y-2">
+                                <li><b>Data Visualization:</b> Choosing appropriate chart types, dashboard design principles</li>
+                                <li><b>Basic Automation (Macros / VBA - Optional):</b> Recording and running simple macros</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="powerbi">
+                <h2 class="text-3xl font-bold text-slate-800 mb-2 flex items-center">
+                    <span class="text-2xl mr-4 text-white bg-blue-500 rounded-full w-12 h-12 flex items-center justify-center">2</span>
+                    Introduction to Power BI
+                </h2>
+                <p class="text-slate-600 mb-8 ml-16">Master interactive dashboards and business intelligence for powerful data storytelling.</p>
+                <div class="grid md:grid-cols-2 gap-8 ml-16 items-center">
+                    <div class="space-y-4">
+                        <div class="accordion-item bg-white rounded-lg shadow-md">
+                            <button class="accordion-button w-full text-left p-5 font-semibold text-slate-800 flex justify-between items-center">
+                                Power BI Desktop Fundamentals
+                                <span class="accordion-arrow transition-transform duration-300">&#9660;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="p-5 pt-0 text-slate-600 list-disc list-inside space-y-2">
+                                    <li><b>Connecting & Transforming Data:</b> Using Power Query</li>
+                                    <li><b>Building Data Models:</b> Understanding the Relationships View</li>
+                                    <li><b>Designing Visualizations:</b> Working in the Report View</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item bg-white rounded-lg shadow-md">
+                            <button class="accordion-button w-full text-left p-5 font-semibold text-slate-800 flex justify-between items-center">
+                                Data Analysis Expressions (DAX)
+                                <span class="accordion-arrow transition-transform duration-300">&#9660;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="p-5 pt-0 text-slate-600 list-disc list-inside space-y-2">
+                                    <li><b>Intro to DAX:</b> Calculated columns vs. measures</li>
+                                    <li><b>Common Functions:</b> <code>SUM</code>, <code>AVERAGE</code>, <code>CALCULATE</code>, <code>FILTER</code></li>
+                                    <li><b>Key Concepts:</b> Filter Context vs. Row Context</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item bg-white rounded-lg shadow-md">
+                            <button class="accordion-button w-full text-left p-5 font-semibold text-slate-800 flex justify-between items-center">
+                                Visualization & Cloud Service
+                                <span class="accordion-arrow transition-transform duration-300">&#9660;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="p-5 pt-0 text-slate-600 list-disc list-inside space-y-2">
+                                    <li><b>Dashboard Design:</b> Slicers, filters, drill-throughs, and best practices</li>
+                                    <li><b>Power BI Service:</b> Publishing, sharing, and refreshing reports</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white rounded-lg shadow-md">
+                         <h3 class="text-center font-semibold text-slate-700 mb-4">BI Project Components</h3>
+                         <div class="chart-container">
+                            <canvas id="powerBiChart"></canvas>
+                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sql">
+                <h2 class="text-3xl font-bold text-slate-800 mb-2 flex items-center">
+                    <span class="text-2xl mr-4 text-white bg-amber-500 rounded-full w-12 h-12 flex items-center justify-center">3</span>
+                    Introduction to SQL
+                </h2>
+                <p class="text-slate-600 mb-8 ml-16">Learn the foundational language for interacting with and retrieving data from databases.</p>
+                <div class="space-y-4 ml-16">
+                    <div class="accordion-item bg-white rounded-lg shadow-md">
+                        <button class="accordion-button w-full text-left p-5 font-semibold text-slate-800 flex justify-between items-center">
+                            Core SQL Commands
+                            <span class="accordion-arrow transition-transform duration-300">&#9660;</span>
+                        </button>
+                        <div class="accordion-content">
+                            <ul class="p-5 pt-0 text-slate-600 list-disc list-inside space-y-2">
+                                <li><code>SELECT</code>, <code>FROM</code>, <code>WHERE</code> for data retrieval</li>
+                                <li><code>ORDER BY</code> for sorting results</li>
+                                <li><code>LIMIT</code> / <code>TOP</code> for limiting output</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-white rounded-lg shadow-md">
+                        <button class="accordion-button w-full text-left p-5 font-semibold text-slate-800 flex justify-between items-center">
+                            Aggregation & Joining Tables
+                            <span class="accordion-arrow transition-transform duration-300">&#9660;</span>
+                        </button>
+                        <div class="accordion-content">
+                            <ul class="p-5 pt-0 text-slate-600 list-disc list-inside space-y-2">
+                                <li><b>Aggregation:</b> <code>COUNT</code>, <code>SUM</code>, <code>AVG</code> with <code>GROUP BY</code></li>
+                                <li><b>Filtering Groups:</b> Using the <code>HAVING</code> clause</li>
+                                <li><b>Joining Tables:</b> <code>INNER JOIN</code> and <code>LEFT JOIN</code> to combine data</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="python">
+                <h2 class="text-3xl font-bold text-slate-800 mb-2 flex items-center">
+                    <span class="text-2xl mr-4 text-white bg-red-500 rounded-full w-12 h-12 flex items-center justify-center">4</span>
+                    Basic Python for Data Analysis
+                </h2>
+                <p class="text-slate-600 mb-8 ml-16">An optional but highly recommended path to unlock powerful data manipulation and analysis.</p>
+                <div class="space-y-4 ml-16">
+                    <div class="accordion-item bg-white rounded-lg shadow-md">
+                        <button class="accordion-button w-full text-left p-5 font-semibold text-slate-800 flex justify-between items-center">
+                            Python Fundamentals & Libraries
+                            <span class="accordion-arrow transition-transform duration-300">&#9660;</span>
+                        </button>
+                        <div class="accordion-content">
+                            <ul class="p-5 pt-0 text-slate-600 list-disc list-inside space-y-2">
+                                <li><b>Core Concepts:</b> Variables, data types, control flow, functions</li>
+                                <li><b>Pandas Library:</b> Working with DataFrames for data manipulation</li>
+                                <li><b>NumPy Library:</b> Basic numerical operations</li>
+                                <li><b>Visualization:</b> Creating basic charts with <code>Matplotlib</code> or <code>Seaborn</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="benefits" class="bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-slate-800 text-center mb-8">How These Skills Benefit You</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="p-6 border border-slate-200 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-indigo-600 mb-4">For Becoming a Computer Teacher</h3>
+                        <ul class="space-y-3 text-slate-600 list-disc list-inside">
+                            <li>Teach in-demand, practical, and job-oriented courses that students need.</li>
+                            <li>Offer unique, specialized courses like "Financial Data Analysis with Excel & Power BI".</li>
+                            <li>Build credibility with a modern and relevant skillset.</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 border border-slate-200 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-indigo-600 mb-4">For Opening an Institute</h3>
+                        <ul class="space-y-3 text-slate-600 list-disc list-inside">
+                            <li>Develop a robust and modern curriculum that stands out from competitors.</li>
+                            <li>Efficiently manage your institute's finances and student data using the very tools you teach.</li>
+                            <li>Attract more students by showcasing your expertise and the value of your courses.</li>
+                            <li>Create opportunities for corporate training and consulting services.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-slate-800 text-white mt-20">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <h3 class="text-2xl font-bold mb-2">Your Journey to Empowering Others Starts Here</h3>
+            <p class="text-slate-300">By mastering these tools, you will be a competent and credible teacher, well-prepared to educate others and successfully launch your own training institute.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active');
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    }
+                });
+            });
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const mobileNavLinks = mobileMenu.querySelectorAll('a');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            const ctx = document.getElementById('powerBiChart').getContext('2d');
+            const powerBiChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Data Transformation (Power Query)', 'Data Modeling', 'Visualization (Reports)', 'Sharing (Service)'],
+                    datasets: [{
+                        label: 'BI Project Components',
+                        data: [40, 20, 30, 10],
+                        backgroundColor: [
+                            'rgba(79, 70, 229, 0.8)', // indigo-600
+                            'rgba(59, 130, 246, 0.8)', // blue-500
+                            'rgba(34, 197, 94, 0.8)', // green-500
+                            'rgba(245, 158, 11, 0.8)' // amber-500
+                        ],
+                        borderColor: [
+                            'rgba(255, 255, 255, 1)',
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
